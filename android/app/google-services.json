@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "851111485205",
+    "project_id": "tokenizer-400505",
+    "storage_bucket": "tokenizer-400505.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851111485205:android:ffa45f88a4ab9e354cd31c",
+        "android_client_info": {
+          "package_name": "com.tokenizer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851111485205-a4icvrn8aa309gomip4tv6jb1v2g1r5o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBce3CdaqfZn0FsxzJ3BKqq_dZ6JBtiFuU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851111485205-a4icvrn8aa309gomip4tv6jb1v2g1r5o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
