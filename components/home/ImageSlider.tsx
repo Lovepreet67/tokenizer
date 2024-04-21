@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import {getUser} from '../../redux/user/userSlice.ts';
 import {API_URL} from '@env';
 
-const ImageSlider: React.FC = ({}) => {
+const ImageSlider: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [images, setImages] = useState([
     'https://nitj.ac.in/public/assets/images/logo_250.png',
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     height: 400,
     borderRadius: 10,
     borderBottomRightRadius: 10,
-    marginHorizontal:5
+    marginHorizontal: 5,
   },
   pagination: {
     flexDirection: 'row',

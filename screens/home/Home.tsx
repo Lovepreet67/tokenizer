@@ -46,7 +46,7 @@ const friendListStyles = StyleSheet.create({
     flexDirection: 'row',
     gap: 12,
     flexWrap: 'wrap',
-  }
+  },
 });
 
 /**
@@ -57,12 +57,7 @@ const Home = () => {
     <Screen>
       <SearchBar />
       <FriendList />
-      <ImageSlider
-        images={[
-          'https://images.unsplash.com/photo-1711997632197-e09b5c59605d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8',
-          'https://images.unsplash.com/photo-1711873314750-39f3b0d45f09?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8',
-        ]}
-      />
+      <ImageSlider />
     </Screen>
   );
 };
