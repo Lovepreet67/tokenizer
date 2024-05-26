@@ -1,4 +1,4 @@
-import React, {  useMemo } from "react";
+import React, {useMemo} from 'react';
 import {Header, Screen, Transactions} from '../../components';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {RootHomeStackParamList} from '../../navigators/StackNavigatorHome.tsx';
@@ -44,8 +44,10 @@ const Interactions = () => {
       <Transactions
         transactionObject={filteredTransactionObject}
         type={'token'}
+        height={'84%'}
       />
-      <KeyboardAvoidingView >
+      {/*we have to position it to absollute so that it will not disapear*/}
+      <KeyboardAvoidingView>
         <PayAndAdd friendUsername={route.params.friendUsername} />
       </KeyboardAvoidingView>
     </Screen>

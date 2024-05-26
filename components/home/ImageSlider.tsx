@@ -21,7 +21,6 @@ const ImageSlider: React.FC = () => {
     try {
       const resopnse = await fetch(`${API_URL}/account/images`, requestOptions);
       const result = await resopnse.json();
-      console.log('result : ', result);
       if (resopnse.status !== 200) {
         throw new Error();
       }

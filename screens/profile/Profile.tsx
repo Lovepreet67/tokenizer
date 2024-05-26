@@ -30,6 +30,7 @@ interface UserDetail {
 }
 
 const Profile = () => {
+  console.log('api url : ',API_URL)
   const dispatch = useDispatch<any>();
   const balanceObject = useSelector(getBalanceObject);
   const userObject = useSelector(getUser);

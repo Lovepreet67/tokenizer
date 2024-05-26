@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {transactionsState} from '../../types/transactions.ts';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {DimensionValue, ScrollView, StyleSheet, Text, View} from 'react-native';
 import Loading from '../../screens/overlays/Loading.tsx';
 import Transaction from './Transaction.tsx';
 import {scaled, verticalSacled} from '../../constants/sizes.ts';
@@ -8,25 +8,21 @@ import {scaled, verticalSacled} from '../../constants/sizes.ts';
 interface transactionsprops {
   transactionObject: transactionsState;
   type: 'money' | 'token';
+  height?: DimensionValue;
 }
 
 /**
  * @description Scroll list to display transactions , loading message and message according to the situation.
  * @param transactionObject
  * @param type
+ * @param height
  */
 const Transactions: React.FC<transactionsprops> = ({
   transactionObject,
   type,
+  height = '90%',
 }) => {
   const scrollViewRef = useRef<ScrollView | null>(null);
-  if (transactionObject.transactions.length === 0) {
-    return (
-      <View style={styles.list}>
-        <Text>Nothing to show</Text>
-      </View>
-    );
-  }
   if (transactionObject.loading) {
     return (
       <View style={styles.list}>
@@ -41,8 +37,15 @@ const Transactions: React.FC<transactionsprops> = ({
       </View>
     );
   }
+  if (transactionObject.transactions.length === 0) {
+    return (
+      <View style={styles.list}>
+        <Text>Nothing to show</Text>
+      </View>
+    );
+  }
   return (
-    <View style={styles.list}>
+    <View style={[{height: height}, styles.list]}>
       <ScrollView
         ref={scrollViewRef}
         onContentSizeChange={() =>
@@ -73,6 +76,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: scaled(10),
     backgroundColor: 'white',
     flexGrow: 1,
+    // paddingBottom: 50,
+    // height:'87%'
   },
 });
 export default Transactions;

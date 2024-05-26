@@ -1,13 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Friend, Screen, SearchBar} from '../../components';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   fetchFriends,
   getFriendObject,
 } from '../../redux/friends/friendsSlice.ts';
-import {scaled} from '../../constants/sizes.ts';
 import ImageSlider from '../../components/home/ImageSlider.tsx';
+import {API_URL} from '@env';
+import {getUser} from '../../redux/user/userSlice.ts';
 // sub sections
 
 /**
@@ -19,11 +20,9 @@ const FriendList = () => {
   const dispatch = useDispatch<any>();
   useEffect(() => {
     if (friendsList.length === 0) {
-      console.log('fetching friend');
       dispatch(fetchFriends());
     }
   }, [dispatch, friendsList.length]);
-  console.log(friendsList);
   return (
     <View style={friendListStyles.listContainer}>
       {loading ? (
@@ -34,6 +33,55 @@ const FriendList = () => {
         <Text>Nothing to show search and add friends</Text>
       ) : (
         friendsList.map(friend => <Friend name={friend} key={friend} />)
+      )}
+    </View>
+  );
+};
+
+const VendorList = () => {
+  const [vendorList, setVendorList] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const user = useSelector(getUser);
+  const fetchVendors = useCallback(async () => {
+    setLoading(true);
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', user.jwt);
+    const requestOptions: RequestInit = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+    try {
+      const resopnse = await fetch(
+        `${API_URL}/account/vendors`,
+        requestOptions,
+      );
+      const result = await resopnse.json();
+      if (resopnse.status !== 200) {
+        throw new Error();
+      }
+      setVendorList(() => result.vendors);
+    } catch (err) {
+      setError('Something went wrong');
+    } finally {
+      setLoading(false);
+    }
+  }, [user.jwt]);
+  useEffect(() => {
+    fetchVendors();
+  }, [fetchVendors]);
+  console.log(vendorList);
+  return (
+    <View style={friendListStyles.listContainer}>
+      {loading ? (
+        <Text>Loading</Text>
+      ) : error.length !== 0 ? (
+        <Text>{error}</Text>
+      ) : vendorList.length === 0 ? (
+        <Text>Nothing to show search and add friends</Text>
+      ) : (
+        vendorList.map(friend => <Friend name={friend} key={friend} />)
       )}
     </View>
   );
@@ -55,11 +103,23 @@ const friendListStyles = StyleSheet.create({
 const Home = () => {
   return (
     <Screen>
-      <SearchBar />
-      <FriendList />
-      <ImageSlider />
+      <ScrollView>
+        <SearchBar />
+        <FriendList />
+        <ImageSlider />
+        <Text style={textStyle.subheader}>Vendors</Text>
+        <VendorList />
+      </ScrollView>
     </Screen>
   );
 };
+const textStyle = StyleSheet.create({
+  subheader: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#000',
+    marginLeft: 10,
+  },
+});
 
 export default Home;

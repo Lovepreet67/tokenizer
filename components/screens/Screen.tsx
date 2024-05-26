@@ -15,12 +15,13 @@ const Screen: React.FC<screenProps> = ({children}) => {
 };
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    // height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    flexGrow: 1,
     gap: verticalSacled(4),
     backgroundColor: '#fff',
-   paddingTop:'3%'
+    paddingTop: '3%',
   },
 });
 export default Screen;

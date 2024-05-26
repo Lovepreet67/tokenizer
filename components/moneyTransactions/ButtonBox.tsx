@@ -108,10 +108,11 @@ const ButtonBox = () => {
           return undefined;
         }
         showSuccess('Transaction Complete');
-        setTimeout(() => {
-          dispatch(fetchMoneyTransactions());
-          dispatch(fetchBalance());
-        }, 5000);
+        // since this task is done auto matically using notifications
+        // setTimeout(() => {
+        //   dispatch(fetchMoneyTransactions());
+        //   dispatch(fetchBalance());
+        // }, 5000);
       } catch (error) {
         showError('Something went wrong');
         return undefined;
