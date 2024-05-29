@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Header, Screen, Transactions} from '../../components';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {RootHomeStackParamList} from '../../navigators/StackNavigatorHome.tsx';
@@ -8,7 +8,7 @@ import {
   fetchTransactions,
   getTransactionsObject,
 } from '../../redux/transactions/transactionsSlice.ts';
-import {KeyboardAvoidingView} from 'react-native';
+import {Keyboard, KeyboardAvoidingView, StyleSheet, View} from 'react-native';
 
 // sub components
 /**
@@ -18,6 +18,29 @@ const Interactions = () => {
   const route = useRoute<RouteProp<RootHomeStackParamList, 'Interactions'>>();
   const transactionObject = useSelector(getTransactionsObject);
   const dispatch = useDispatch<any>();
+  // use keyboard to set hight of the transactiosn
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true); // or some other action
+      },
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false); // or some other action
+      },
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
+
   /**
    * @description check if transactions length is zero if zero it means transaction may not be fetched in the redux, so it will dispatch fetchTransaction dispatcher.
    */
@@ -41,16 +64,26 @@ const Interactions = () => {
   return (
     <Screen>
       <Header title={route.params.friendUsername} backButton={true} />
-      <Transactions
-        transactionObject={filteredTransactionObject}
-        type={'token'}
-        height={'84%'}
-      />
-      {/*we have to position it to absollute so that it will not disapear*/}
-      <KeyboardAvoidingView>
-        <PayAndAdd friendUsername={route.params.friendUsername} />
-      </KeyboardAvoidingView>
+      <View style={styles.container}>
+        <Transactions
+          transactionObject={filteredTransactionObject}
+          type={'token'}
+          height={isKeyboardVisible ? '79%' : '85%'}
+        />
+        {/*we have to position it to absollute so that it will not disapear*/}
+        <KeyboardAvoidingView>
+          <PayAndAdd friendUsername={route.params.friendUsername} />
+        </KeyboardAvoidingView>
+      </View>
     </Screen>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 1,
+  },
+});
 export default Interactions;

@@ -8,8 +8,6 @@ import {ButtonBox, Header, Screen, Transactions} from '../../components';
 import {StripeProvider} from '@stripe/stripe-react-native';
 import {STRIPE_PUBLISHABLE_KEY} from '@env';
 import {StyleSheet, View} from 'react-native';
-import {scaled, verticalSacled} from '../../constants/sizes.ts';
-
 /**
  * @description Screen to display money transactions that user made by buying and refunding the token. It includes header, money transactions and buttonBox which allow user to buy or ask for refund from this screen.
  */
@@ -29,7 +27,11 @@ const MoneyTransactions = () => {
       <StripeProvider publishableKey={STRIPE_PUBLISHABLE_KEY}>
         <Header title={'Money Transaction'} backButton={false} />
         <View style={styles.container}>
-          <Transactions type={'money'} transactionObject={moneyTransactions} height={'87%'} />
+          <Transactions
+            type={'money'}
+            transactionObject={moneyTransactions}
+            height={'87%'}
+          />
           <ButtonBox />
         </View>
       </StripeProvider>

@@ -1,5 +1,10 @@
 import React, {useCallback, useMemo} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {AddIcon} from '../../resources/svgs';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUser} from '../../redux/user/userSlice.ts';
@@ -153,11 +158,11 @@ const PayAndAdd: React.FC<payAndAddProps> = ({friendUsername}) => {
   return (
     <View style={styles.buttonBox}>
       {!isFriend && (
-        <TouchableOpacity onPress={addFriend} style={{width:'10%'}}>
+        <TouchableOpacity onPress={addFriend} style={{width: '10%'}}>
           <AddIcon width={45} height={45} />
         </TouchableOpacity>
       )}
-      <View style={{width:!isFriend?'85%':'98%'}}>
+      <View style={{width: !isFriend ? '85%' : '98%'}}>
         <AmountInputForm handler={handler} />
       </View>
     </View>

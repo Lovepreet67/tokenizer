@@ -2,7 +2,10 @@ import React from 'react';
 import StackNavigatorHome from './StackNavigatorHome.tsx';
 import {MoneyTransactions, Profile, TokenTransactions} from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  getFocusedRouteNameFromRoute,
+  NavigationContainer,
+} from '@react-navigation/native';
 import {
   HomeIcon,
   Logo,
@@ -27,6 +30,7 @@ const MainBottomTabNavigator = () => {
         <MainTab.Screen
           name="Home"
           component={StackNavigatorHome}
+          // component={Home}
           options={{
             tabBarIcon: ({focused}) => (
               <HomeIcon

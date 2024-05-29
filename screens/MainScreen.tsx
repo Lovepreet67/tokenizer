@@ -59,6 +59,7 @@ const MainScreen: React.FC = () => {
     return <StackNavigatorAuthentication />;
   } else {
     return <BottomNavigator />;
+    // return <StackNavigatorHome/>
   }
 };
 

@@ -20,7 +20,10 @@ const StackNavigatorHome: React.FC = () => {
       <HomeStack.Navigator
         initialRouteName={'Home'}
         screenOptions={{headerShown: false}}>
-        <HomeStack.Screen name="Home" component={Home} />
+        <HomeStack.Screen
+          name="Home"
+          component={Home}
+        />
         <HomeStack.Screen name="Interactions" component={Interactions} />
       </HomeStack.Navigator>
     </NavigationContainer>

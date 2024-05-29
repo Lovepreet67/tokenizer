@@ -1,10 +1,8 @@
 import React, {useRef} from 'react';
 import {transactionsState} from '../../types/transactions.ts';
 import {DimensionValue, ScrollView, StyleSheet, Text, View} from 'react-native';
-import Loading from '../../screens/overlays/Loading.tsx';
 import Transaction from './Transaction.tsx';
 import {scaled, verticalSacled} from '../../constants/sizes.ts';
-
 interface transactionsprops {
   transactionObject: transactionsState;
   type: 'money' | 'token';
@@ -26,7 +24,7 @@ const Transactions: React.FC<transactionsprops> = ({
   if (transactionObject.loading) {
     return (
       <View style={styles.list}>
-        <Loading />
+        <Text style={{fontSize: 20, fontWeight: '400'}}>Loading</Text>
       </View>
     );
   }
